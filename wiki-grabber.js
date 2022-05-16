@@ -97,6 +97,32 @@ class WikiGrabber {
         img.outerHTML = newImg
       }
     })
+    article.querySelectorAll('video').forEach(video => {
+      if (+video.width > 100)
+      {
+        video.parentNode.style=''
+        const source=video.querySelector('source')
+        const a=video.querySelector('a')
+        const newSource =`<source type = "${source.type}" src = "${source.src}" />`
+        const newA = `<a href = "${a.href}">${a.textContent}</a>`
+        const newVideo =`
+        <video
+          className = "${video.classList.value}"
+          id = "${video.id}"
+          width = "100%"
+          height = "auto"
+          preload = "metadata"
+          controls = "controls" >
+          ${newSource}
+          ${newA}
+        </video>`;
+        video.outerHTML = newVideo
+      }
+    })
+    article.querySelectorAll('.entry').forEach(tst=>{
+      tst.outerHTML='<h1 style="color: red">ПРОВЕРКА</h1>'+tst.outerHTML
+      let i=0;
+    });
     return  article.outerHTML
   }
   _generateTree(nd, obj) {
